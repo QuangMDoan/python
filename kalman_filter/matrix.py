@@ -89,7 +89,7 @@ class Matrix(object):
         
         return M
     
-    def T(self):
+    def transpose(self):
         """
         Returns a transposed copy of this Matrix.
         """
@@ -133,7 +133,8 @@ class Matrix(object):
         """
         Defines the behavior of - operator (NOT subtraction)
         """
-        return Matrix([[-n for x in row] for row in self.g])
+        grid = [[-x for x in row] for row in self.g]
+        return Matrix(grid)
 
     def __sub__(self, other):
         """
@@ -150,7 +151,7 @@ class Matrix(object):
             raise ValueError("Matrices can only be multiplied if the dimensions are matched")
         
         A = self.g
-        B = other.T().g
+        B = other.transpose().g
 
         grid = [[dot(a, b) for b in B] for a in A]
         return Matrix(grid)
